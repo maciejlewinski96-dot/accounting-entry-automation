@@ -1,0 +1,189 @@
+# Process Diagram – SAP Journal Posting Automation
+
+This document presents the **AS-IS (current state)** and **TO-BE (automated state)** process flows for recurring month-end journal postings into SAP.
+
+The analysis focuses on repetitive journal entry requests received from internal teams during the month-end close process.
+
+---
+
+# AS-IS Process (Manual Posting)
+
+## Process Description
+
+During the month-end close period, the finance team receives recurring journal entry requests from internal teams.  
+These entries are typically provided in **CSV format** and require **manual posting into SAP**.
+
+The process is repetitive and generates operational workload due to the number of requests received over a short time window.
+
+Typical workload observed:
+- ~30 recurring requests
+- requests received across ~4 days
+- manual SAP posting required for each request
+
+---
+
+## AS-IS Process Flow
+
+### Internal Team
+Start  
+↓  
+Prepare recurring journal entries  
+↓  
+Export journal entries to CSV file  
+↓  
+Send CSV file to Finance Analyst via email  
+
+### Finance Analyst
+Receive journal entry request  
+↓  
+Review CSV file structure and posting details  
+
+Decision: **Is the CSV file complete and understandable?**
+
+If NO  
+→ Contact Internal Team and request clarification  
+→ Updated file received  
+→ Review CSV file again  
+
+If YES  
+↓  
+Log into SAP  
+↓  
+Manually enter journal entry data  
+↓  
+Verify posting parameters (accounts, cost centers, amounts)  
+
+Decision: **Is the journal entry correct?**
+
+If NO  
+→ Correct manual input  
+→ Re-enter journal entry data  
+
+If YES  
+↓  
+Submit journal entry in SAP  
+↓  
+Journal entry recorded in SAP  
+↓  
+Repeat process for next request  
+
+End
+
+---
+
+## AS-IS Pain Points
+
+The manual process creates several operational challenges:
+
+- repetitive manual SAP postings
+- high workload during month-end close
+- interruptions caused by incoming requests
+- increased risk of manual posting errors
+- inefficient use of analyst time
+
+---
+
+# TO-BE Process (Automated Posting)
+
+## Process Description
+
+The improved process introduces an **automation bot** capable of reading structured CSV input files and posting recurring journal entries into SAP.
+
+The bot performs validation checks before posting entries and only involves the finance analyst when exceptions occur.
+
+---
+
+## TO-BE Process Flow
+
+### Internal Team
+Start  
+↓  
+Prepare recurring journal entries  
+↓  
+Export journal entries to CSV file  
+↓  
+Submit CSV file for automated processing  
+
+---
+
+### Automation Bot / SAP
+
+Bot reads CSV input file  
+↓  
+Validate file structure and mandatory fields  
+
+Decision: **Is the input file valid?**
+
+If NO  
+→ Generate error notification  
+→ Send error email to Finance Analyst  
+
+If YES  
+↓  
+Log into SAP automatically  
+↓  
+Apply predefined posting logic  
+↓  
+Submit journal entry into SAP  
+
+Decision: **Was SAP posting successful?**
+
+If NO  
+→ Generate error notification  
+→ Send error email to Finance Analyst  
+
+If YES  
+↓  
+Record posting result in log  
+↓  
+Journal entry posted automatically  
+
+End
+
+---
+
+### Finance Analyst (Exception Handling)
+
+Monitor automated processing results  
+
+If error notification received:
+
+Decision: **Can the CSV file be corrected?**
+
+If YES  
+→ Correct CSV file  
+→ Resubmit file for automated processing  
+
+If NO  
+→ Perform manual journal posting in SAP  
+
+End
+
+---
+
+# Key Improvements
+
+The automated process introduces several operational improvements:
+
+- reduction of repetitive manual work
+- fewer interruptions during month-end close
+- lower risk of manual input errors
+- faster handling of recurring journal postings
+- improved use of analyst capacity
+
+The finance analyst becomes involved **only in exception scenarios**, rather than executing the entire process manually.
+
+---
+
+# Skills Demonstrated
+
+This process improvement initiative demonstrates several Business Analysis capabilities:
+
+- business process analysis
+- identification of automation opportunities
+- definition of automation logic
+- exception handling design
+- collaboration with development teams
+- finance operations improvement
+
+---
