@@ -8,6 +8,14 @@ The initiative originated from an operational issue observed during the month-en
 
 Because many of these entries followed a similar structure each month, an opportunity for automation was identified.
 
+The project documentation includes:
+
+1. Process diagram
+2. Process analysis
+3. Business requirements
+4. Automation logic
+5. Exception handling
+
 ## Business Context
 
 During month-end close, the finance team received approximately 30 recurring journal entry requests over a period of several days.
